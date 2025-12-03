@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoundBitch.com</title>
+    <style>
+        :root { --ocean:#0f172a; --neon:#00d4ff; --light:#38bdf8; --flame:#ff0033; }
+        body { margin:0; background:var(--ocean); font-family:Segoe UI,Arial,sans-serif; overflow:hidden; }
+        #ageGate { position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.98);
+            display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999; text-align:center; padding:20px; }
+        #ageGate h1 { font-size:clamp(2.5em,10vw,4em); color:var(--flame); text-shadow:0 0 30px #ff0033; margin:0; }
+        .age-btn { padding:18px 50px; margin:15px; font-size:1.6em; font-weight:bold; border:none; border-radius:12px; cursor:pointer; min-width:240px; }
+        #enterBtn { background:var(--neon); color:#000; }
+        #leaveBtn { background:#333; color:#fff; border:2px solid #666; }
+        #mainContent { display:none; min-height:100vh; text-align:center; padding:40px 20px; color:var(--neon); }
+        .hero h1 { font-size:clamp(2.2em,8vw,3.2em); color:var(--flame); text-shadow:0 0 25px #ff0033; margin:0; }
+        .big-btn { background:var(--flame); color:#fff; padding:20px 40px; font-size:1.8em; border:none; border-radius:16px; cursor:pointer; margin:30px; box-shadow:0 0 30px rgba(255,0,51,0.6); }
+        .big-btn:hover { background:#ff3366; transform:scale(1.05); }
+        .vip { background:rgba(255,0,51,0.15); border:2px solid var(--flame); padding:20px; border-radius:16px; margin:30px auto; max-width:560px; }
+        .vip h3 { color:var(--flame); }
+    </style>
+</head>
+<body>
+
+<div id="ageGate">
+    <h1>BoundBitch.com</h1>
+    <p>You must be 18 years or older to enter this site.<br>This website contains adult material.</p>
+    <button class="age-btn" id="enterBtn">I am 18 or older – Enter</button><br>
+    <button class="age-btn" onclick="location.href='https://google.com'">I am under 18 – Leave</button>
+</div>
+
+<div id="mainContent">
+    <div class="hero">
+        <h1>BoundBitch.com</h1>
+        <p>Deep Ocean. Deeper Desires.</p>
+        <button class="big-btn" onclick="location.href='home.html'">Bind It / Register</button>
+    </div>
+
+    <div class="vip">
+        <h3>VIP Membership – $9.99 / month</h3>
+        <p>Unlimited storage • Permanent 0G blockchain archiving • No batch delays • Priority everything</p>
+        <button style="background:#ff0033;padding:15px 40px;font-size:1.3em;" 
+                onclick="window.open('https://yourpaymentlink.com/vip','_blank')">
+            Become VIP – $9.99/month
+        </button>
+        <p><small>We cover all blockchain & network fees</small></p>
+    </div>
+
+    <p><a href="https://t.me/boundbitchvip" style="color:#00d4ff;">t.me/BoundBitchVIP</a> • 18+ Only • DMCA Compliant</p>
+</div>
+
+<script>
+    document.getElementById('enterBtn').onclick = () => {
+        document.getElementById('ageGate').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+        document.body.style.overflow = 'auto';
+    };
+</script>
+</body>
+</html>

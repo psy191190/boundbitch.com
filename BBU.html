@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BoundBitch • Home</title>
+    <style>
+        :root { --ocean:#0f172a; --neon:#00d4ff; --flame:#ff0033; }
+        body { margin:0; background:var(--ocean); color:var(--neon); font-family:Segoe UI,Arial,sans-serif; padding:20px; }
+        header h1 { text-align:center; color:var(--flame); text-shadow:0 0 25px #ff0033; font-size:2.5em; }
+        .upload-btn { display:block; margin:20px auto; padding:18px; font-size:1.6em; background:var(--flame); color:#fff; border:none; border-radius:12px; max-width:400px; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; margin-top:30px; }
+        .video-card { background:rgba(255,255,255,0.05); border:1px solid var(--neon); border-radius:12px; overflow:hidden; }
+        .video-card video { width:100%; border-radius:12px 12px 0 0; }
+        .video-card p { padding:10px; text-align:center; }
+        .ad-banner { text-align:center; margin:30px 0; padding:20px; background:rgba(0,0,0,0.5); border-radius:12px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BoundBitch.com</h1>
+        <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
+            ➕ Upload New File (MEGA Vault Ready)
+        </button>
+        <input type="file" id="fileInput" multiple accept="video/*,image/*" style="display:none;" 
+               onchange="alert('Uploading to your MEGA vault... (full backend tomorrow – 15GB free permanent!')">
+    </header>
+
+    <!-- ExoClick Popunder (Replace YOUR_EXOCLICK_ZONE_ID with your zone ID) -->
+    <script src="https://a.exoclick.com/popunder1000.js" async></script>
+    <script>
+        var ad_id = "YOUR_EXOCLICK_ZONE_ID"; // Get from ExoClick dashboard
+        var ad_popup = { "popunder": true };
+    </script>
+
+    <!-- JuicyAds Banner (Replace YOUR_JUICYADS_SITE_ID) -->
+    <div class="ad-banner">
+        <script type="text/javascript" src="https://ad.juicyads.com/js/jad.js"></script>
+        <script type="text/javascript">
+            jad({sid: "YOUR_JUICYADS_SITE_ID", size:"728x90"}); // Get from JuicyAds
+        </script>
+    </div>
+
+    <!-- Chaturbate Affiliate Widget (Replace YOURUSERNAME with your affiliate ID) -->
+    <div class="ad-banner">
+        <iframe src="https://chaturbate.com/in/?tour=3Mc9&campaign=YOURUSERNAME&track=default" 
+                width="100%" height="800" frameborder="0" scrolling="no"></iframe>
+        <p><small>Live cams – Earn 20% revshare on tips!</small></p>
+    </div>
+
+    <div class="grid">
+        <!-- Sample videos (backend populates real ones from MEGA) -->
+        <div class="video-card">
+            <video controls poster="https://via.placeholder.com/400x300/0f172a/ff0033?text=Video+1">
+                <source src="sample.mp4" type="video/mp4">
+            </video>
+            <p>Hot Clip #001 • 12.4k views</p>
+        </div>
+        <div class="video-card">
+            <video controls poster="https://via.placeholder.com/400x300/0f172a/ff0033?text=Video+2">
+                <source src="sample2.mp4" type="video/mp4">
+            </video>
+            <p>Ocean Deep #002 • 8.7k views</p>
+        </div>
+        <!-- Add more cards as uploads roll in -->
+    </div>
+
+    <footer style="text-align:center; margin-top:40px; color:#64748b;">
+        <p>18+ Only | DMCA Compliant | Powered by MEGA + 0G</p>
+    </footer>
+</body>
+</html>
