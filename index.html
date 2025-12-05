@@ -1,61 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BoundBitch.com</title>
-    <style>
-        :root { --ocean:#0f172a; --neon:#00d4ff; --light:#38bdf8; --flame:#ff0033; }
-        body { margin:0; background:var(--ocean); font-family:Segoe UI,Arial,sans-serif; overflow:hidden; }
-        #ageGate { position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.98);
-            display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999; text-align:center; padding:20px; }
-        #ageGate h1 { font-size:clamp(2.5em,10vw,4em); color:var(--flame); text-shadow:0 0 30px #ff0033; margin:0; }
-        .age-btn { padding:18px 50px; margin:15px; font-size:1.6em; font-weight:bold; border:none; border-radius:12px; cursor:pointer; min-width:240px; }
-        #enterBtn { background:var(--neon); color:#000; }
-        #leaveBtn { background:#333; color:#fff; border:2px solid #666; }
-        #mainContent { display:none; min-height:100vh; text-align:center; padding:40px 20px; color:var(--neon); }
-        .hero h1 { font-size:clamp(2.2em,8vw,3.2em); color:var(--flame); text-shadow:0 0 25px #ff0033; margin:0; }
-        .big-btn { background:var(--flame); color:#fff; padding:20px 40px; font-size:1.8em; border:none; border-radius:16px; cursor:pointer; margin:30px; box-shadow:0 0 30px rgba(255,0,51,0.6); }
-        .big-btn:hover { background:#ff3366; transform:scale(1.05); }
-        .vip { background:rgba(255,0,51,0.15); border:2px solid var(--flame); padding:20px; border-radius:16px; margin:30px auto; max-width:560px; }
-        .vip h3 { color:var(--flame); }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BOUNDBITCH.COM — Deep Ocean. Deeper Desires.</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Rajdhani:wght@600&display=swap');
+
+    body { 
+      margin:0; min-height:100vh; background:#000; color:#ff0066; 
+      font-family: 'Rajdhani', sans-serif;
+      background: radial-gradient(circle at center, #110011, #000);
+    }
+
+    /* AGE GATE */
+    #ageGate { 
+      position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.98);
+      display:flex; flex-direction:column; justify-content:center; align-items:center; 
+      z-index:9999; text-align:center; padding:20px; 
+    }
+    #ageGate .title-wrapper { max-width:95vw; padding:0 10px; }
+    #ageGate h1 { 
+      font-family:'Orbitron', sans-serif; font-size:clamp(2em,7.5vw,3.4em); 
+      color:#ff0066; text-shadow:0 0 30px #ff0066; margin:0; letter-spacing:0.1em; 
+      white-space:nowrap; display:inline-block;
+    }
+    /* ←←← SMALLER + CENTERED BUTTONS */
+    .age-btn { 
+      padding:14px 40px; margin:12px; font-size:1.4em; font-weight:bold; 
+      border:none; border-radius:12px; cursor:pointer; min-width:240px; 
+      transition:0.3s; display:block; width:280px; 
+    }
+    #enterBtn { background:#ff0066; color:#000; box-shadow:0 0 30px #ff0066; }
+    #enterBtn:hover { background:#ff3399; transform:scale(1.07); }
+    #leaveBtn { background:#111; color:#fff; border:2px solid #ff0066; }
+    #leaveBtn:hover { background:#ff0066; color:#000; }
+
+    /* LANDING */
+    #landing, #registerPage { 
+      display:none; min-height:100vh; text-align:center; padding:40px 20px; 
+    }
+    .hero .title-wrapper { max-width:95vw; padding:0 15px; }
+    .hero h1 { 
+      font-family:'Orbitron', sans-serif; font-size:clamp(2em,7.5vw,3.3em); 
+      color:#ff0066; text-shadow:0 0 30px #ff0066; margin:0 0 10px; letter-spacing:0.11em; 
+      white-space:nowrap; display:inline-block;
+    }
+    .hero p { font-size:1.6em; margin:20px 0 40px; }
+    .big-btn { background:#ff0066; color:#000; padding:22px 50px; font-size:2em; font-weight:bold; border:none; border-radius:16px; cursor:pointer; margin:40px auto; display:inline-block; box-shadow:0 0 40px #ff0066; transition:0.3s; }
+    .big-btn:hover { background:#ff3399; transform:scale(1.08); box-shadow:0 0 60px #ff0066; }
+
+    .vip { background:rgba(20,0,30,0.85); border:2px solid #ff0066; padding:30px; border-radius:16px; margin:50px auto; max-width:600px; box-shadow:0 0 40px #ff0066; }
+    .vip h3 { font-family:'Orbitron', sans-serif; color:#ff0066; font-size:2.2em; text-shadow:0 0 20px #ff0066; margin:0 0 15px; }
+    .vip button { background:#ff0066; color:#000; padding:16px 40px; font-size:1.5em; font-weight:bold; border:none; border-radius:12px; cursor:pointer; margin:20px 0; transition:0.3s; box-shadow:0 0 30px #ff0066; }
+    .vip button:hover { background:#ff3399; transform:scale(1.05); }
+
+    /* REGISTER FORM */
+    .card { background:rgba(20,0,30,0.85); padding:40px; border-radius:16px; box-shadow:0 0 40px #ff0066; text-align:center; max-width:420px; width:90%; margin:40px auto; border:2px solid #ff0066; }
+    /* ←←← SMALLER + CENTERED TITLE */
+    .card h1 { 
+      font-family:'Orbitron', sans-serif; margin:0 0 20px; 
+      font-size:2em;  /* reduced from 2.5em */
+      text-shadow:0 0 20px #ff0066; 
+    }
+    input, button { width:100%; padding:14px; margin:10px 0; border-radius:8px; border:none; font-size:1.1em; }
+    input { background:#111; color:#fff; border:2px solid #333; }
+    input:focus { outline:none; border-color:#ff0066; box-shadow:0 0 15px #ff0066; }
+    button { background:#ff0066; color:#000; font-weight:bold; cursor:pointer; transition:0.3s; }
+    button:hover { background:#ff3399; transform:scale(1.05); }
+    #result { margin-top:20px; padding:15px; border-radius:8px; }
+    a { color:#00ffff; text-decoration:underline; }
+    footer { margin-top:60px; font-size:1.2em; }
+  </style>
 </head>
 <body>
 
-<div id="ageGate">
-    <h1>BoundBitch.com</h1>
-    <p>You must be 18 years or older to enter this site.<br>This website contains adult material.</p>
-    <button class="age-btn" id="enterBtn">I am 18 or older – Enter</button><br>
-    <button class="age-btn" onclick="location.href='https://google.com'">I am under 18 – Leave</button>
-</div>
+  <!-- AGE GATE -->
+  <div id="ageGate">
+    <div class="title-wrapper"><h1>BOUNDBITCH.COM</h1></div>
+    <p style="font-size:1.5em;max-width:90%;">You must be 18+ to enter.<br>This domain contains extreme adult material.</p>
+    <button class="age-btn" id="enterBtn">I AM 18+ — LET ME IN</button>
+    <button class="age-btn" id="leaveBtn" onclick="location.href='https://google.com'">Under 18 — Leave</button>
+  </div>
 
-<div id="mainContent">
+  <!-- LANDING PAGE -->
+  <div id="landing">
     <div class="hero">
-        <h1>BoundBitch.com</h1>
-        <p>Deep Ocean. Deeper Desires.</p>
-        <button class="big-btn" onclick="location.href='home.html'">Bind It / Register</button>
+      <div class="title-wrapper"><h1>BOUNDBITCH.COM</h1></div>
+      <p>Deep Ocean. Deeper Desires.</p>
+      <div class="big-btn" id="goToRegister">REGISTER→WITH 20 GB FREE MEGA STORAGE VAULT</div>
     </div>
 
     <div class="vip">
-        <h3>VIP Membership – $9.99 / month</h3>
-        <p>Unlimited storage • Permanent 0G blockchain archiving • No batch delays • Priority everything</p>
-        <button style="background:#ff0033;padding:15px 40px;font-size:1.3em;" 
-                onclick="window.open('https://yourpaymentlink.com/vip','_blank')">
-            Become VIP – $9.99/month
-        </button>
-        <p><small>We cover all blockchain & network fees</small></p>
+      <h3>VIP MEMBERSHIP — $9.99 / month</h3>
+      <p>Unlimited storage • Permanent 0G blockchain archiving • Zero delays • Priority uploads • Everything forever</p>
+      <button onclick="window.open('https://yourpaymentlink.com/vip','_blank')">UPGRADE TO VIP — $9.99/month</button>
+      <p><small>We eat all blockchain & network fees for you.</small></p>
     </div>
 
-    <p><a href="https://t.me/boundbitchvip" style="color:#00d4ff;">t.me/BoundBitchVIP</a> • 18+ Only • DMCA Compliant</p>
-</div>
+    <footer>
+      <p><a href="https://t.me/boundbitchvip">t.me/BoundBitchVIP</a> • 18+ Only • DMCA Compliant</p>
+    </footer>
+  </div>
+
+  <!-- REGISTER PAGE -->
+  <div id="registerPage">
+    <div class="card">
+      <h1>BOUNDBITCH.COM</h1>
+      <p>Register once → get your private 20 GB MegaSync vault instantly.</p>
+
+      <form id="boundForm">
+        <input type="email" id="email" placeholder="your@email.com" required />
+        <input type="password" id="pass" placeholder="choose a strong password" required />
+        <button type="submit">Register Now→With 20 GB Free Mega Storage</button>
+      </form>
+
+      <div id="result"></div>
+    </div>
+  </div>
 
 <script>
-    document.getElementById('enterBtn').onclick = () => {
-        document.getElementById('ageGate').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'block';
-        document.body.style.overflow = 'auto';
-    };
+  // Age gate
+  document.getElementById('enterBtn').onclick = () => {
+    document.getElementById('ageGate').style.display = 'none';
+    document.getElementById('landing').style.display = 'block';
+    document.body.style.overflow = 'auto';
+  };
+
+  // Go to register form
+  document.getElementById('goToRegister').onclick = () => {
+    document.getElementById('landing').style.display = 'none';
+    document.getElementById('registerPage').style.display = 'block';
+    window.scrollTo(0,0);
+  };
+
+  // Register form submit (unchanged)
+  document.getElementById('boundForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const pass  = document.getElementById('pass').value;
+
+    document.querySelector('#boundForm button').textContent = "Registering…";
+    document.querySelector('#boundForm button').disabled = true;
+
+    const res = await fetch('/api/mega-register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pass })
+    }).then(r => r.json());
+
+    document.querySelector('#boundForm button').textContent = "REGISTER → GET 20 GB FREE MEGA STORAGE NOW";
+    document.querySelector('#boundForm button').disabled = false;
+
+    if (res.success) {
+      document.getElementById('result').innerHTML = `
+        <div style="background:#001100; border:2px solid lime; padding:20px; border-radius:12px;">
+          <h2 style="color:lime; margin:0;">SUCCESS — YOU ARE BOUND</h2>
+          <p><strong>20 GB MegaSync account created instantly</strong></p>
+          <p>→ <a href="${res.directLogin}" target="_blank">ONE-CLICK OPEN MEGASYNC</a></p>
+          <p>Master Key (save this!):<br><code style="background:#000; padding:8px; word-break:break-all;">${res.masterKey}</code></p>
+          <small>Check your email for full credentials too.</small>
+        </div>`;
+    } else {
+      document.getElementById('result').innerHTML = `<div style="color:red; background:#300; padding:15px; border-radius:8px;">Error: ${res.error}</div>`;
+    }
+  };
 </script>
+
 </body>
 </html>
