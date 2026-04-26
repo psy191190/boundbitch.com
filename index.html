@@ -1,136 +1,286 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Video Gallery Template</title>
+  <title>BOUNDBITCH.COM — Deep Ocean. Deeper Desires.</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Rajdhani:wght@600&display=swap');
+
     body { 
-      margin: 0; 
-      font-family: Arial, sans-serif; 
-      background-color: #f4f4f9; 
-      color: #333; 
+      margin:0; min-height:100vh; background:#000; color:#ff0066; 
+      font-family: 'Rajdhani', sans-serif;
+      background: radial-gradient(circle at center, #110011, #000);
     }
-    header { 
-      background-color: #2c3e50; 
-      color: white; 
-      padding: 2rem; 
-      text-align: center; 
+
+    /* AGE GATE */
+    #ageGate { 
+      position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.98);
+      display:flex; flex-direction:column; justify-content:center; align-items:center; 
+      z-index:9999; text-align:center; padding:20px; 
     }
+    #ageGate .title-wrapper { max-width:95vw; padding:0 10px; }
+    #ageGate h1 { 
+      font-family:'Orbitron', sans-serif; font-size:clamp(2em,7.5vw,3.4em); 
+      color:#ff0066; text-shadow:0 0 30px #ff0066; margin:0; letter-spacing:0.1em; 
+      white-space:nowrap; display:inline-block;
+    }
+    .age-btn { 
+      padding:14px 40px; margin:12px; font-size:1.4em; font-weight:bold; 
+      border:none; border-radius:12px; cursor:pointer; min-width:240px; 
+      transition:0.3s; display:block; width:280px; 
+    }
+    #enterBtn { background:#ff0066; color:#000; box-shadow:0 0 30px #ff0066; }
+    #enterBtn:hover { background:#ff3399; transform:scale(1.07); }
+    #leaveBtn { background:#111; color:#fff; border:2px solid #ff0066; }
+    #leaveBtn:hover { background:#ff0066; color:#000; }
+
+    /* MAIN SITE */
+    #mainSite { 
+      display:none; min-height:100vh; padding:20px; 
+    }
+    .header {
+      text-align:center; padding:30px 20px; border-bottom:2px solid #ff0066;
+      margin-bottom:30px;
+    }
+    .header h1 { 
+      font-family:'Orbitron', sans-serif; font-size:clamp(1.8em,5vw,2.5em); 
+      color:#ff0066; text-shadow:0 0 20px #ff0066; margin:0; 
+    }
+    .header p { font-size:1.2em; margin:10px 0 0; opacity:0.8; }
+
+    /* VIDEO GRID */
     .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
+      display:grid; 
+      grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); 
+      gap:25px; 
+      max-width:1400px; 
+      margin:0 auto;
+      padding:0 20px;
     }
     .video-card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform 0.2s;
+      background:rgba(20,0,30,0.85); 
+      border:2px solid #ff0066; 
+      border-radius:12px; 
+      overflow:hidden;
+      transition:0.3s;
+      cursor:pointer;
     }
     .video-card:hover {
-      transform: scale(1.02);
+      transform:translateY(-5px);
+      box-shadow:0 0 30px #ff0066;
     }
-    .thumbnail {
-      width: 100%;
-      height: 160px;
-      background-color: #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
+    .video-thumb {
+      width:100%; 
+      height:180px; 
+      background:#1a001a;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:3em;
+      color:#ff0066;
     }
-    .info {
-      padding: 15px;
+    .video-thumb img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
-    .title {
-      font-weight: bold;
-      margin-bottom: 5px;
+    .video-info {
+      padding:15px;
     }
-    /* Modal Styles */
-    #modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
+    .video-title {
+      font-size:1.1em;
+      font-weight:bold;
+      margin:0 0 8px;
+      color:#fff;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
-    .modal-content {
-      width: 90%;
-      max-width: 800px;
-      background: #000;
-      position: relative;
+    .video-meta {
+      font-size:0.9em;
+      opacity:0.7;
+      display:flex;
+      gap:15px;
     }
-    .close-btn {
-      position: absolute;
-      top: -40px;
-      right: 0;
-      color: white;
-      font-size: 2rem;
-      cursor: pointer;
-      background: none;
-      border: none;
+
+    /* VIDEO PLAYER MODAL */
+    #videoModal {
+      display:none;
+      position:fixed;
+      top:0; left:0; width:100vw; height:100vh;
+      background:rgba(0,0,0,0.95);
+      z-index:9998;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      padding:20px;
     }
-    iframe {
-      width: 100%;
-      aspect-ratio: 16/9;
-      border: none;
+    #videoModal.active { display:flex; }
+    .modal-close {
+      position:absolute;
+      top:20px; right:30px;
+      font-size:2em;
+      color:#ff0066;
+      cursor:pointer;
+      background:none;
+      border:none;
+      width:auto;
     }
+    .video-container {
+      width:100%;
+      max-width:900px;
+      aspect-ratio:16/9;
+      background:#000;
+      border:2px solid #ff0066;
+      border-radius:12px;
+      overflow:hidden;
+    }
+    .video-container iframe, .video-container video {
+      width:100%;
+      height:100%;
+      border:none;
+    }
+    .video-source-links {
+      margin-top:20px;
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .source-btn {
+      padding:10px 25px;
+      background:#ff0066;
+      color:#000;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      width:auto;
+      display:inline-block;
+    }
+    .source-btn:hover {
+      background:#ff3399;
+    }
+
+    footer {
+      text-align:center;
+      padding:40px 20px;
+      margin-top:60px;
+      border-top:1px solid #333;
+      font-size:1em;
+      opacity:0.7;
+    }
+    footer a { color:#00ffff; }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>My Video Collection</h1>
-</header>
-
-<div class="video-grid" id="videoGrid"></div>
-
-<div id="modal">
-  <div class="modal-content">
-    <button class="close-btn" onclick="closeModal()">×</button>
-    <div id="player"></div>
+  <!-- AGE GATE -->
+  <div id="ageGate">
+    <div class="title-wrapper"><h1>BOUNDBITCH.COM</h1></div>
+    <p style="font-size:1.5em;max-width:90%;">You must be 18+ to enter.<br>This domain contains extreme adult material.</p>
+    <button class="age-btn" id="enterBtn">I AM 18+ — LET ME IN</button>
+    <button class="age-btn" id="leaveBtn" onclick="location.href='https://google.com'">Under 18 — Leave</button>
   </div>
-</div>
+
+  <!-- MAIN SITE -->
+  <div id="mainSite">
+    <div class="header">
+      <h1>BOUNDBITCH.COM</h1>
+      <p>Deep Ocean. Deeper Desires.</p>
+    </div>
+
+    <div class="video-grid" id="videoGrid">
+      <!-- Videos will be loaded here -->
+    </div>
+
+    <footer>
+      <p>18+ Only • DMCA Compliant</p>
+    </footer>
+  </div>
+
+  <!-- VIDEO PLAYER MODAL -->
+  <div id="videoModal">
+    <button class="modal-close" onclick="closeVideo()">✕</button>
+    <div class="video-container" id="videoContainer">
+      <!-- Video embed goes here -->
+    </div>
+    <div class="video-source-links" id="sourceLinks">
+      <!-- Source links go here -->
+    </div>
+  </div>
 
 <script>
-  const videoData = [
-    { id: 1, title: "Nature Scenery", embedUrl: "https://youtube.com" },
-    { id: 2, title: "City Lights", embedUrl: "https://youtube.com" }
+  const videos = [
+    {
+      id: 1,
+      title: "1",
+      duration: "n/a",
+      views: "0",
+      embedUrl: "https://drive.google.com/file/d/YOUR_FILE_ID/preview",
+      driveLink: "https://drive.google.com/file/d/1HLNivhMZAHaYq6UGpugXRqzetI_JhS0g/view",
+      megaLink: "https://mega.nz/file/YOUR_MEGA_LINK"
+    },
+    {
+      id: 2,
+      title: "Video Title 2",
+      duration: "08:45",
+      views: "856",
+      embedUrl: "https://drive.google.com/file/d/YOUR_FILE_ID_2/preview",
+      driveLink: "https://drive.google.com/file/d/YOUR_FILE_ID_2/view",
+      megaLink: "https://mega.nz/file/YOUR_MEGA_LINK_2"
+    },
+    {
+      id: 3,
+      title: "Video Title 3",
+      duration: "15:20",
+      views: "2.1K",
+      embedUrl: "https://mega.nz/embed/YOUR_EMBED_CODE",
+      driveLink: "https://drive.google.com/file/d/YOUR_FILE_ID_3/view",
+      megaLink: "https://mega.nz/file/YOUR_MEGA_LINK_3"
+    }
   ];
 
-  function loadGallery() {
+  document.getElementById('enterBtn').onclick = () => {
+    document.getElementById('ageGate').style.display = 'none';
+    document.getElementById('mainSite').style.display = 'block';
+    document.body.style.overflow = 'auto';
+    loadVideos();
+  };
+
+  function loadVideos() {
     const grid = document.getElementById('videoGrid');
-    grid.innerHTML = videoData.map(v => `
-      <div class="video-card" onclick="openModal('${v.embedUrl}')">
-        <div class="thumbnail">▶</div>
-        <div class="info">
-          <div class="title">${v.title}</div>
+    grid.innerHTML = videos.map(v => `
+      <div class="video-card" onclick="openVideo(${v.id})">
+        <div class="video-thumb">▶</div>
+        <div class="video-info">
+          <div class="video-title">${v.title}</div>
+          <div class="video-meta">
+            <span>⏱ ${v.duration}</span>
+            <span>👁 ${v.views}</span>
+          </div>
         </div>
       </div>
     `).join('');
   }
 
-  function openModal(url) {
-    document.getElementById('player').innerHTML = `<iframe src="${url}" allowfullscreen></iframe>`;
-    document.getElementById('modal').style.display = 'flex';
+  function openVideo(id) {
+    const video = videos.find(v => v.id === id);
+    if (!video) return;
+    
+    const modal = document.getElementById('videoModal');
+    const container = document.getElementById('videoContainer');
+    
+    container.innerHTML = `<iframe src="${video.embedUrl}" allowfullscreen></iframe>`;
+    modal.classList.add('active');
   }
 
-  function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-    document.getElementById('player').innerHTML = '';
+  function closeVideo() {
+    const modal = document.getElementById('videoModal');
+    const container = document.getElementById('videoContainer');
+    container.innerHTML = '';
+    modal.classList.remove('active');
   }
-
-  loadGallery();
 </script>
-
 </body>
 </html>
